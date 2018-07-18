@@ -1,0 +1,78 @@
+1. Pycharm에서 mysite 프로젝트 생성
+2. Django 설치 ctrl + alt + s -> 패키지 추가
+3. mysqlclient 설치
+   터미널에서
+   pip install mysqlclient==1.3.12
+4. 장고프로젝트 생성
+   터미널에서
+   django-admin startproject mysitepy
+5. 디렉토리 정리 (manage.py 맨위 상단 프로젝트 폴더아 아래에, mysitepy 하나 위의 디렉토리에 옴기고 mysitepy 삭제)
+6. settings.py 설정
+   1) TIME_ZONE = 'Asia/Seoul'
+   2) DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djdb',
+        'USER': 'djdb',
+        'PASSWORD': 'djdb',
+        'HOST': '127.0.0.1',
+        'PORT': '3306'
+    }
+  }
+
+7. 기본적으로 장고 프로젝트가 관리하는 테이블 생성
+    터미널에서
+    python manage.py migrate
+
+8. 장고 프로젝트 관리자 계정 생성하기
+    python manage.py createsuperuser
+
+9. 지금까지 작업 확인하기
+   1) 서버 시작하기
+      터미널에서
+      python manage.py runserver 0.0.0.0:8888
+   2) 브라우저로 접근
+      http://localhost:8888
+
+10. template 디렉토리 설정
+    settings.py 에
+
+    TEMPLATES = [
+    {
+        ....
+        'DIRS' : [os.path.join(BASE_DIR, 'templates')]
+        ....
+    }
+    설정 후,
+    프로젝트 디렉토리 바로 빝에 templates 디렉토리 생성
+
+11. static 디렉토리 설정
+    settings.py 에
+
+    STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'statics'),
+    )
+    STATIC_URL = '/assets/'
+
+
+12. Application 생성 ( 반복)
+    터미널
+    python manage.py startapp main
+    settings.py 설정
+    INSTALLED_APPS = [
+    'main']  추가
+
+== model delete
+Guestbook.objects.filter(id=20).filter(password='').delete()
+guestbook = Guestbook.objects.get(id=20).delete()
+guestbook.delete()
+
+== model update
+user = User.objects.get(id=10)
+usr.name = ''
+user.password = ''
+user.save()
+
+
+
+
